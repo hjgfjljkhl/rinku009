@@ -1,0 +1,650 @@
+
+<!DOCTYPE html>
+<html id="page-top">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>The Safest Way to Meet Singles</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="css/main.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+	
+	<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
+	
+    <script type="text/javascript" src="https://geoip.joinsafelyonline.com/"></script>
+    <script>
+        $(document).ready(function () {
+            var city  = geoip_city();
+            var state = geoip_region();
+            var long  = geoip_longitude();
+            var lati  = geoip_latitude();
+
+            if (!city) {
+                $('.city').html('Your Area');
+            } else {
+                $('.city').html(city + ', ' + state);
+            }
+
+        });
+    </script>
+
+    <!-- Google Maps Script  -->
+    <script type="text/javascript">
+        var map;
+        var marker;
+        var loc;
+
+        function initMap() {
+            loc = new google.maps.LatLng(
+                geoip_latitude(),
+                geoip_longitude()
+            );
+
+            map = new google.maps.Map(document.getElementById('map-canvas'), {
+                zoom:                   11,
+                center:                 loc,
+                mapTypeId:              google.maps.MapTypeId.ROADMAP,
+                zoomControl:            false,
+                scaleControl:           false,
+                scrollwheel:            false,
+                disableDoubleClickZoom: true
+            });
+
+            var circleBigOptions = {
+                strokeColor:   '#649fed',
+                strokeOpacity: 1,
+                strokeWeight:  3,
+                fillColor:     '#c9cfdd',
+                fillOpacity:   0.35,
+                map:           map,
+                center:        loc,
+                radius:        (3 * 1609) //Miles to radians
+            };
+
+            var circleBig = new google.maps.Circle(circleBigOptions);
+
+            var image = {
+                url:    'img/bluedot.png',
+                size:   new google.maps.Size(18, 16),
+                anchor: new google.maps.Point(8, 9)
+            };
+
+            var blueDotMarker = new google.maps.Marker({
+                position: loc,
+                map:      map,
+                icon:     image
+            });
+        };
+    </script>
+
+
+
+    <script>
+        var isMobileVerifyFooterShown = true;
+        var stillFocused = false;
+
+        function showMobileVerifyFooter(speed) {
+            speed                     = speed !== null ? speed : 'fast';
+            isMobileVerifyFooterShown = true;
+            if(!stillFocused) {
+                $('#MobileVerifyFooter2').fadeIn(speed);
+            }
+        }
+
+        function hideMobileVerifyFooter(speed) {
+            speed                     = speed !== null ? speed : 'fast';
+            isMobileVerifyFooterShown = false;
+            $('#MobileVerifyFooter2').fadeOut(speed);
+        }
+
+        function scrollToAnchor(aid){
+            // var aTag = $("a[name='"+ aid +"']");
+            // $('html,body').animate({scrollTop: aTag.offset().top},'slow');
+            window.location = "#" + aid; // this hack solves offset misalignment issues
+        }
+
+        // handle postmessage iframe communication
+        var respondToIframeClick = function (e) {
+            if (e.data == 'inputfocus') {
+                stillFocused = true;
+                hideMobileVerifyFooter(0);
+            } else if (e.data == 'inputblur' && !isMobileVerifyFooterShown) {
+                stillFocused = false;
+                showMobileVerifyFooter(0);
+            }
+        };
+        window.addEventListener('message', respondToIframeClick, false);
+
+        jQuery(document).ready(function ($) {
+            $('body *').click(function(){
+                stillFocused = false;
+                showMobileVerifyFooter(0);
+            });
+
+            $('.modalForm').click(function (e) {
+                e.preventDefault();
+                hideMobileVerifyFooter(0);
+
+                if($('body').hasClass('desktop')) {
+                    $('#myModal').modal({backdrop: 'static', keyboard: false});
+                } else {
+                    scrollToAnchor('join')
+                }
+            });
+
+            $('#myModal')
+            // .modal({backdrop: 'static', keyboard: false})
+                .on('show.bs.modal', function () {
+                    hideMobileVerifyFooter(0);
+                    $(this).find('.modal-body').css({
+                        width:        'auto', //probably not needed
+                        height:       'auto', //probably not needed
+                        'max-height': '100%'
+                    });
+                })
+                .on('shown.bs.modal', function () {
+                    $('#myInput').focus();
+                })
+                .on('hidden.bs.modal', function () {
+                    showMobileVerifyFooter(0);
+                });
+
+
+            $(window).scroll(function () {
+                // console.log("footer: " + isMobileVerifyFooterShown +" scroll:" + $(this).scrollTop());
+                if ($(this).scrollTop() > 100) {
+                    showMobileVerifyFooter();
+                } else {
+                    hideMobileVerifyFooter();
+                    // isMobileVerifyFooterShown = true; // reset this flag so it's eligible to turn back on
+                }
+            });
+        });
+
+    </script>
+
+
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  
+
+        <style>
+            .modal-body {
+                position: relative;
+                overflow-y: auto;
+                max-height: 400px;
+                padding: 15px;
+            }
+			iframe {
+				width: 100%;
+			}
+        </style>
+
+	</head>
+	<body class="desktop">
+<section id="a_LogoHeader">
+	<div class="container">
+		<div class="col-sm-5 hidden-xs">
+			<img src="img/a_Logo.png" alt="" class="img-responsive center-block logo"/>
+			<p>The <span>Safest Way</span>
+		</div>
+		<div class="col-sm-4 col-sm-offset-3 over18 hidden-xs">
+			<img src="img/18plus_WT.png" alt="" class="img-responsive center-block"/>
+		</div>
+
+		<div class="row visible-xs">
+			<div class="col-xs-12">
+				<div class="row">
+					<img src="img/a_Logo.png" alt="" class="img-responsive center-block logo"/>
+				</div>
+				<div class="row">
+					<p>The <span>Safest Way</span> to Meet Singles in <span class="city"></span>
+					</p>
+				</div>
+				<div class="row">
+					<img src="img/a_Logo_btm.png" alt="" class="img-responsive center-block logov"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="a_ContentBlock">
+
+	<div class="container">
+
+		<div class="row headline hidden-xs">
+			<h1>The <span>Safest Way</span> to Meet Singles in <span class="city"></span>
+           </h1>
+		</div>
+
+		<div id="main" class="row">
+
+			<div id="mainBlock" class="col-lg-12">
+				<div id="leftSide" class="col-md-8">
+					<div id="gallery" class="row">
+
+						<div class="col-sm-12">
+							<div id="slider">
+								<!-- Top part of the slider -->
+								<div class="row">
+									<div class="col-sm-12" id="carousel-bounding-box">
+										<div class="carousel slide" id="myCarousel">
+											<!-- Carousel items -->
+											<div class="carousel-inner" id="carIn">
+												<div class="active item" data-slide-number="0">
+													<img src="img/Alexa/1mb.jpg" id="img0">
+												</div>
+
+												<div class="item" data-slide-number="1">
+													<img src="img/Alexa/2mb.jpg" alt="" id="img1">
+												</div>
+
+												<div class="item" data-slide-number="2">
+													<img src="img/Alexa/3mb.jpg" alt="" id="img2">
+												</div>
+
+												<div class="item" data-slide-number="3">
+													<img src="img/Alexa/4mb.jpg" alt="" id="img3">
+												</div>
+
+												<div class="item" data-slide-number="4">
+													<img src="img/Alexa/5mb.jpg" alt="" id="img4">
+												</div>
+											</div>
+											<!-- Carousel nav -->
+											<div class="carouselNav">
+												<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+													<span class="glyphicon glyphicon-chevron-left"></span>
+												</a>
+
+												<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+													<span class="glyphicon glyphicon-chevron-right"></span>
+												</a>											
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="outer row">
+							<li>
+								<div class="inner">
+									<a class="thumbnail" id="carousel-selector-0">
+										<img src="img/Alexa/thumbs/1.jpg" alt="">
+									</a>
+								
+								</div>
+							</li>
+
+							<li>
+								<div class="inner">
+									<a class="thumbnail" id="carousel-selector-1">
+										<img src="img/Alexa/thumbs/2.jpg" alt="">
+									</a>
+								
+								</div>
+							</li>
+
+							<li>
+								<div class="inner">
+									<a class="thumbnail" id="carousel-selector-2">
+										<img src="img/Alexa/thumbs/3.jpg" alt="">
+									</a>
+								
+								</div>
+							</li>
+
+							<li>
+								<div class="inner">
+									<a class="thumbnail" id="carousel-selector-3">
+										<img src="img/Alexa/thumbs/4.jpg" alt="">
+									</a>
+								
+								</div>
+							</li>
+
+							<li>
+								<div class="inner">
+									<a class="thumbnail" id="carousel-selector-4">
+										<img src="img/Alexa/thumbs/5.jpg" alt="">
+									</a>
+								
+								</div>
+							</li>
+						</div>
+
+					</div>
+
+					<div id="galleryMbv" class="hide">
+
+						<div class="stage">
+							<div id="SLDR-ONE" class="sldr">
+								<ul class="wrp animate" id="slideBox">
+									<li class="elmnt-one"><img src="img/Alexa/1mb.jpg" alt="" id="img1" class="img-responsive imgSlide">
+									</li>
+									<li class="elmnt-two"><img src="img/Alexa/2mb.jpg" alt="" id="img2" class="img-responsive imgSlide">
+									</li>
+									<li class="elmnt-three"><img src="img/Alexa/3mb.jpg" alt="" id="img3" class="img-responsive imgSlide">
+									</li>
+									<li class="elmnt-four"><img src="img/Alexa/4mb.jpg" alt="" id="img4" class="img-responsive imgSlide">
+									</li>
+									<li class="elmnt-five"><img src="img/Alexa/5mb.jpg" alt="" id="img5" class="img-responsive imgSlide">
+									</li>
+
+								</ul>
+							</div>
+
+							<div class="clear"></div>
+
+							<ul class="selectors">
+								<li class="focalPoint"><a href="#"><span>&bull;</span></a>
+								</li>
+								<li><a href="#">&bull;</a>
+								</li>
+								<li><a href="#">&bull;</a>
+								</li>
+								<li><a href="#">&bull;</a>
+								</li>
+								<li><a href="#">&bull;</a>
+								</li>
+								<li><a href="#">&bull;</a>
+								</li>
+							</ul>
+
+							<div class="clear"></div>
+						</div>
+					</div>
+
+
+					<div id="galleryMb">
+						<div class="loading">
+							<div id="container">
+								<div id="mainv" role="main">
+									<section class="slider">
+										<div class="flexslider">
+											<ul class="slides">
+												<li>
+													<img src="img/Alexa/1mb.jpg" alt="" id="img1" class="img-responsive">
+												</li>
+												<li>
+													<img src="img/Alexa/2mb.jpg" alt="" id="img1" class="img-responsive">
+												</li>
+												<li>
+													<img src="img/Alexa/3mb.jpg" alt="" id="img1" class="img-responsive">
+												</li>
+												<li>
+													<img src="img/Alexa/4mb.jpg" alt="" id="img1" class="img-responsive">
+												</li>
+												<li>
+													<img src="img/Alexa/5mb.jpg" alt="" id="img1" class="img-responsive">
+												</li>
+
+											</ul>
+										</div>
+									</section>
+								</div>
+							</div>
+
+							<!-- jQuery -->
+							<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+							<script>
+								window.jQuery || document.write( '<script src="js/libs/jquery-1.7.min.html">\x3C/script>' )
+							</script>
+
+							<!-- FlexSlider -->
+							<script defer src="js/jquery.flexslider.js"></script>
+
+							<script type="text/javascript">
+								$( function () {
+									SyntaxHighlighter.all();
+								} );
+								$( window ).load( function () {
+									$( '.flexslider' ).flexslider( {
+										animation: "slide",
+										start: function ( slider ) {
+											$( 'div' ).removeClass( 'loading' );
+										}
+									} );
+								} );
+							</script>
+							<!-- Syntax Highlighter -->
+							<script type="text/javascript" src="js/shCore.js"></script>
+							<script type="text/javascript" src="js/shBrushXml.js"></script>
+							<script type="text/javascript" src="js/shBrushJScript.js"></script>
+						</div>
+					</div>
+					
+					<div id="leftcol" class="row">
+						<div class="row">
+							<h2>Loren,30<img src="img/verifiedIcon.svg" class="verIcon img-responsive center-block" alt="">
+                         </h2>
+						</div>
+
+						<div class="row info">
+							<div class="col-sm-7">
+								<div class="row">
+									<div class="col-xs-6">
+										<p class="labelInfo">Status</p>
+										<span class="bullet">&bull;</span><span>Online</span>
+									</div>
+									<div class="col-xs-6">
+										<p class="labelInfo">Distance</p>
+										<span id="rNum">3 miles away</span>
+									</div>
+								</div>
+
+								<div class="row">
+									<p class="labelInfo topInfoMar">About Me</p>
+									<span class="biotext">I am a girl with desire. to experience new sexual situations to be flirtatious and attractive when it comes to sex, to achieve a great connection and to be satisfied, and making my man wanting more and more ...</span>
+								</div>
+								<div class="row">
+									<div class="col-xs-6">
+										<p class="labelInfo">Orientation</p>
+										<span>Straight</span>
+									</div>
+									<div class="col-xs-6">
+										<p class="labelInfo">Relationship</p>
+										<span>Single</span>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-xs-6">
+										<p class="labelInfo">Hair</p>
+										<span>Blonde</span>
+									</div>
+									<div class="col-xs-6">
+										<p class="labelInfo">Eyes</p>
+										<span>Hazel</span>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-xs-6">
+										<p class="labelInfo">Height</p>
+										<span>5'5"</span>
+									</div>
+									<div class="col-xs-6">
+										
+									</div>
+								</div>
+
+								<div class="row">
+									<p>Sexual Preferences</p>
+								</div>
+
+								<div class="row tags">
+									<div class="col-xs-3">
+										<p>Anal Sex</p>
+									</div>
+									<div class="col-xs-3">
+										<p>Oral Sex</p>
+									</div>
+									<div class="col-xs-3">
+										<p>Role Play</p>
+									</div>
+									<div class="col-xs-3">
+										<p>+ <span id="rNumTwo"></span> more...</p>
+									</div>
+								</div>
+
+							</div>
+							<div class="col-sm-5">
+
+								
+
+								<div class="row contantIcons">
+									<p>Contacts</p>
+									<a href class="modalForm"><img src="img/contact_Is.png" alt="" class="img-responsive center-block"></a>
+								</div>
+							</div>
+						</div>
+
+						<div class="btnSubmitFrm">
+							<!-- Button trigger modal -->
+							<button type="button" class="btn btn-primary btn-lg MeetMe modalForm">Get Verified to Meet Me!</button>
+
+						</div>
+					</div>
+				</div>
+				<div id="sidebar" class="col-md-4">
+					<div classv="row">
+						<a name="join"></a>
+						<br><br><br><a href="https://privatemeets247.org/retry.html"><img src="img/error-button.png" width="100%"/></a>
+						<img src="img/100.png" width="100%"/>
+					<iframe id="index_reg_iframe" src="https://www.trackdemclicks.com/tracking/click/?sid=Ser1&mt=799194&ofid=260" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" allowtransparency="true" width="100%" height="762"></iframe>
+   
+<!-- REGISTRATION END-->
+					</div>
+
+					<div>
+						<hr class="hrR">
+					</div>
+
+					<div class="row whyVerify">
+
+						<h2>Why Verify? </h2>
+
+			
+						<p><strong>Privatemeets247.org</strong>&#8482; is a fast and secure verification service that makes the experience of meeting people through social networks and online dating sites safer and easier.</p>
+
+						<p>After the tragic murder of a young man linked to a popular classifieds website attracted widespread news coverage, <strong>Privatemeets247.org</strong>&#8482; received extensive media exposure and became the #1 source to verify age and protect men from sexual predators.</p>
+
+						<p>Since US law prohibits credit cards from being issued to minors under the age of 18, we use them to verify your age and check that you are not a registered sex offender. If you are cleared as safe and over 18, you receive a FREE membership giving you full access to member profiles, mobile numbers, and personal contact information.</p>
+
+						<img src="img/sidebar_logos.png" alt="" class="img-responsive center-block">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row bottomline hidden-xs">
+			<h1>Trusted By Millions of Singles Nationwide</h1>
+		</div>
+	</div>
+</section>
+
+<script>
+	function scrollToElem() {
+		var elem = $('a[name="join"]');
+		$('html,body').animate( {
+			scrollTop: elem.offset().top
+		}, 0 );
+	}
+	var respondToSubmit = function (event) {
+		if (event.data === 'submitpressed') {
+			scrollToElem();
+		}
+	};
+	window.addEventListener('message', respondToSubmit, false);
+
+	$('.modalForm').on('click', function () {
+		$('html, body').animate( {
+			scrollTop: $('#sidebar' ).offset().top
+		}, 500);
+	});
+</script>
+
+<section id="a_Footer" class="hidden-xs">
+    <div class="container">
+        <div class="row">
+            <p>Copyright &copy; 2019 Privatemeets247.org. All rights reserved.</p>
+        </div>
+    </div>
+</section>
+
+<section id="a_MobileFooter" class="visible-xs">
+    <div class="row visible-xs">
+        <div class="col-xs-12">
+            <div class="row">
+                <img src="img/a_Logo.png" alt="" class="img-responsive center-block">
+            </div>
+            <div class="row">
+                <p>The <span>Safest Way</span> to Meet Singles in <span class="city"></span></p>
+            </div>
+            <div class="row">
+                <img src="img/a_Logo_btm.png" alt="" class="img-responsive center-block">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="MobileVerifyFooter2" class="visible-xsv">
+    <div class="row">
+        <a href class="modalForm"><h2>Get Verified To Meet Me!</h2></a>
+    </div>
+</section>
+
+
+<script>$('iframe').iFrameResize({checkOrigin: false});</script>
+
+<script>
+	function scrollToElem() {
+	var elem = $('a[name="join"]');
+		$('html,body').animate({scrollTop: elem.offset().top}, 0);
+	} 
+	var respondToSubmit = function (event) {
+		if (event.data === 'submitpressed') {
+			scrollToElem();
+		}
+	};
+	window.addEventListener('message', respondToSubmit, false);	
+	
+	$('.modalForm').on('click', function(){
+		$('html, body').animate({
+			scrollTop: $('#sidebar').offset().top
+		}, 500);
+	});
+</script>        
+
+<script>
+    sidebar = $('#sidebar');
+    main = $('#leftSide');
+
+    if(sidebar.outerHeight() > main.outerHeight()){
+    	main.css('height',sidebar.outerHeight());
+    } 
+	else {
+    	sidebar.css('height',main.outerHeight());
+    }
+
+</script>
+
+<!-- Google Maps Script  -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyApkTkeN6tsp-uL2tiahd7kPu-7gX4oCSg&amp;callback=initMap"></script>
+<script>
+    google.load("maps", "2");
+    google.setOnLoadCallback(function () {
+    });
+</script>
+
+
+
+</body>
+</html>
